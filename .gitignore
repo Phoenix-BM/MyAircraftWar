@@ -1,7 +1,7 @@
 # IDEA dir
 .idea/*
 out/*
-.vscode
+#.vscode
 
 # db dir
 ranklist_db
