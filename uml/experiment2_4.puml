@@ -1,0 +1,99 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class EliteEnemy {
+    + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
+}
+
+abstract class BaseProp {
+    + BaseProp(int locationX, int locationY, int speedX, int speedY)
+    + forward():void
+    + {abstract} effect():void
+}
+
+interface PropFactory {
+ + {abstract} createProp(): BaseProp
+}
+
+BaseProp <.. EliteEnemy
+PropFactory <.. EliteEnemy
+
+class PropBlood {
+    - hp:int
+    + PropBlood(int locationX, int locationY,
+      int speedX, int speedY, int hp)
+    + getHp():int
+    + effect():void
+}
+
+class PropBomb {
+    + PropBomb(int locationX, int locationY,
+      int speedX, int speedY)
+    + effect():void
+}
+
+class PropBullet {
+    + PropBullet(int locationX, int locationY,
+      int speedX, int speedY)
+    + effect():void
+}
+
+class PropBloodFactory
+{
+    - locationX: int
+    - locationY: int
+    - speedX: int
+    - speedY: int
+    - hp: int
+    + createProp():BaseProp
+    + getLocationX(): int
+    + getLocationY(): int
+    + getSpeedX(): int
+    + getSpeedY(): int
+    + getHp(): int
+}
+
+class PropBombFactory
+{
+    - locationX: int
+    - locationY：int
+    - speedX: int
+    - speedY: int
+    + createProp():BaseProp
+    + getLocationX(): int
+    + getLocationY(): int
+    + getSpeedX(): int
+    + getSpeedY(): int
+}
+
+class PropBulletFactory
+{
+    - locationX: int
+    - locationY：int
+    - speedX: int
+    - speedY: int
+    + createProp():BaseProp
+    + getLocationX(): int
+    + getLocationY(): int
+    + getSpeedX(): int
+    + getSpeedY(): int
+}
+
+PropFactory <|.. PropBloodFactory
+PropFactory <|.. PropBombFactory
+PropFactory <|.. PropBulletFactory
+
+BaseProp <|-- PropBlood
+BaseProp <|-- PropBomb
+BaseProp <|-- PropBullet
+
+PropBlood <.. PropBloodFactory
+PropBomb <.. PropBombFactory
+PropBullet <.. PropBulletFactory
+
+
+
+@enduml
