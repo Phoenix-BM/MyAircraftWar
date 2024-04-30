@@ -32,10 +32,13 @@ public class MobEnemy extends AbstractEnemy {
     public List<BaseProp> propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy){
         return new LinkedList<>();
     }
-
     @Override
     public List<BaseBullet> shoot() {
         return new LinkedList<>();
     }
 
+    @Override
+    public List<BaseBullet> executeStrategy(AbstractAircraft abstractAircraft){
+        return new LinkedList<>();
+    }
 }

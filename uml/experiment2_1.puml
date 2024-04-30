@@ -49,6 +49,7 @@ abstract class AbstractEnemy
     + {abstract} shoot():List<BaseBullet>
     + {abstract} propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
 }
+AbstractAircraft <|-- AbstractEnemy
 
 class HeroAircraft {
     - {static} instance:HeroAircraft
@@ -101,7 +102,6 @@ BaseBullet <|-- HeroBullet
 BaseBullet <|-- EnemyBullet
 
 AbstractFlyingObject <|-- AbstractAircraft
-AbstractFlyingObject <|-- AbstractEnemy
 AbstractFlyingObject <|-- BaseBullet
 
 abstract class BaseProp {

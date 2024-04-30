@@ -3,7 +3,7 @@ package edu.hitsz.prop;
 import edu.hitsz.aircraft.AbstractEnemy;
 import edu.hitsz.application.ImageManager;
 
-public class PropBombFactory implements PropFactory {
+public class PropBulletPlusFactory implements PropFactory {
     private int locationX ;
     private int locationY ;
     private int speedX = 0;
@@ -13,10 +13,10 @@ public class PropBombFactory implements PropFactory {
     @Override
     public BaseProp createProp(AbstractEnemy abstractEnemy){
 
-        this.locationX = abstractEnemy.getLocationX() - ImageManager.PROP_BOMB_IMAGE.getWidth() + OFFSET_X;
-        this.locationY = abstractEnemy.getLocationY() - ImageManager.PROP_BOMB_IMAGE.getHeight() + OFFSET_Y;
+        this.locationX = abstractEnemy.getLocationX() - ImageManager.PROP_BULLET_PLUS_IMAGE.getWidth() + OFFSET_X;
+        this.locationY = abstractEnemy.getLocationY() - ImageManager.PROP_BULLET_PLUS_IMAGE.getHeight() + OFFSET_Y;
 
-        return new PropBomb(this.locationX, this.locationY, this.speedX, this.speedY);
+        return new PropBulletPlus(this.locationX, this.locationY, this.speedX, this.speedY);
     }
     public int getLocationX() {return this.locationX;}
     public int getLocationY() {return this.locationY;}
@@ -25,3 +25,4 @@ public class PropBombFactory implements PropFactory {
     public int getOffsetX() {return OFFSET_X;}
     public int getOffsetY() {return OFFSET_Y;}
 }
+

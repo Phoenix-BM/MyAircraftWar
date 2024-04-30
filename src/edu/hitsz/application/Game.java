@@ -1,13 +1,13 @@
 package edu.hitsz.application;
 
+import edu.hitsz.DAO.DAOPatternDemo;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.aircraft.HeroAircraft;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
-import edu.hitsz.prop.BaseProp;
-import edu.hitsz.prop.PropBlood;
-import edu.hitsz.prop.PropBomb;
-import edu.hitsz.prop.PropBullet;
+import edu.hitsz.bullet.DirectShoot;
+import edu.hitsz.bullet.HeroBullet;
+import edu.hitsz.prop.*;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import javax.swing.*;
@@ -139,6 +139,10 @@ public class Game extends JPanel {
                 gameOverFlag = true;
                 System.out.println("Game Over!");
             }
+            if(gameOverFlag){
+                DAOPatternDemo daoPatternDemo = new DAOPatternDemo();
+                daoPatternDemo.DAODemo(score);
+            }
 
         };
 
@@ -167,10 +171,14 @@ public class Game extends JPanel {
 
     private void shootAction() {
         // TODO 敌机射击
-        for(AbstractEnemy eliteEnemy : enemyAircrafts)
-            enemyBullets.addAll(eliteEnemy.shoot());
+        for(AbstractEnemy abstractEnemy : enemyAircrafts) {
+            enemyBullets.addAll(abstractEnemy.executeStrategy(abstractEnemy));
+        }
         // 英雄射击
-        heroBullets.addAll(heroAircraft.shoot());
+        //heroAircraft.setStrategy(new DirectShoot());
+        heroBullets.addAll(heroAircraft.executeStrategy(heroAircraft));
+
+        //heroBullets.addAll(heroAircraft.shoot());
     }
 
     private void bulletsMoveAction() {
@@ -235,15 +243,8 @@ public class Game extends JPanel {
                         int tmpScore = enemyAircraft.getScore();
                         score += tmpScore;
 
-                        if (enemyAircraft instanceof EliteEnemy) {
-                            enemyAircraft.propDrop(props, enemyAircraft);
-                        }
-                        if (enemyAircraft instanceof ElitePlusEnemy) {
-                            enemyAircraft.propDrop(props, enemyAircraft);
-                        }
-                        if (enemyAircraft instanceof BossEnemy) {
-                            enemyAircraft.propDrop(props, enemyAircraft);
-                        }
+                        enemyAircraft.propDrop(props, enemyAircraft);
+
                     }
                 }
                 // 英雄机 与 敌机 相撞，均损毁
@@ -255,18 +256,12 @@ public class Game extends JPanel {
         }
 
         // Todo: 我方获得道具，道具生效
-        for(AbstractFlyingObject prop : props){
+        for(BaseProp prop : props){
             prop.forward();
             if(heroAircraft.crash(prop) || prop.crash(heroAircraft)){
-                if(prop instanceof PropBlood){
-                    //heroAircraft.increaseHp(((PropBlood) prop).getHp());
-                    ((PropBlood) prop).effect();
-                }
-                else if(prop instanceof PropBullet){
-                    ((PropBullet) prop).effect();
-                }
-                else if(prop instanceof PropBomb){
-                    ((PropBomb) prop).effect();
+                prop.effect();
+                if(prop instanceof PropBullet || prop instanceof PropBulletPlus){
+                    heroBullets.addAll(heroAircraft.executeStrategy(heroAircraft));
                 }
                 prop.vanish();
             }

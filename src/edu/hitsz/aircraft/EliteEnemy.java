@@ -15,10 +15,10 @@ public class EliteEnemy extends AbstractEnemy {
     private int power = 20;
     private int direction = 1;
 
-
     public EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score) {
         super(locationX, locationY, speedX, speedY, hp, score);
     }
+
 
     @Override
     public void forward() {
@@ -43,6 +43,7 @@ public class EliteEnemy extends AbstractEnemy {
         propFactories.add(new PropBloodFactory());
         propFactories.add(new PropBombFactory());
         propFactories.add(new PropBulletFactory());
+        propFactories.add(new PropBulletPlusFactory());
 
         if (shouldDropProp) {
             int propIndex = rand.nextInt(propFactories.size());
@@ -55,7 +56,6 @@ public class EliteEnemy extends AbstractEnemy {
 
         return props;
     }
-
     @Override
     public List<BaseBullet> shoot(){
         List<BaseBullet> res = new LinkedList<>();
@@ -70,4 +70,5 @@ public class EliteEnemy extends AbstractEnemy {
         }
         return res;
     }
+
 }

@@ -16,5 +16,6 @@ public class PropBlood extends BaseProp {
     @Override
     public void effect(){
         HeroAircraft.getInstance().increaseHp(getHp());
+        System.out.println("HpSupply active!");
     }
 }

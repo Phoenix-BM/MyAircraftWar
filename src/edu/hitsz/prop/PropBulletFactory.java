@@ -19,7 +19,7 @@ public class PropBulletFactory implements PropFactory {
         return new PropBullet(this.locationX, this.locationY, this.speedX, this.speedY);
     }
     public int getLocationX() {return this.locationX;}
-    public int getLocationY() {return  this.locationY;}
+    public int getLocationY() {return this.locationY;}
     public int getSpeedX() {return this.speedX;}
     public int getSpeedY() {return this.speedY;}
     public int getOffsetX() {return OFFSET_X;}

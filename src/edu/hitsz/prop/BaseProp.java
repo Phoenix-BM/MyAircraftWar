@@ -3,8 +3,6 @@ package edu.hitsz.prop;
 import edu.hitsz.application.Main;
 import edu.hitsz.basic.AbstractFlyingObject;
 public abstract class BaseProp extends AbstractFlyingObject {
-    private static final int OFFSET_X = 10; // 横向偏移量
-    private static final int OFFSET_Y = 10; // 纵向偏移量
     public BaseProp(int locationX, int locationY, int speedX, int speedY) {
         super(locationX, locationY, speedX, speedY);
     }

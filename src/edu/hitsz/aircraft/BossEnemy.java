@@ -35,16 +35,18 @@ public class BossEnemy extends AbstractEnemy {
         Random rand = new Random();
 
         double chance = 0.7;
-
-        int numPropsToDrop = rand.nextInt(4);
         
         int propOffsetX = 0;
         int propOffsetY = 0;
+
+        int maxNumPropsToDrop = 3;
+        int numPropsToDrop = rand.nextInt(maxNumPropsToDrop + 1);
 
         propFactories = new ArrayList<>();
         propFactories.add(new PropBloodFactory());
         propFactories.add(new PropBombFactory());
         propFactories.add(new PropBulletFactory());
+        propFactories.add(new PropBulletPlusFactory());
 
         for(int i=0; i<numPropsToDrop; i++) {
             boolean shouldDropProp = rand.nextDouble() < chance;
@@ -66,7 +68,6 @@ public class BossEnemy extends AbstractEnemy {
 
         return props;
     }
-
     @Override
     public List<BaseBullet> shoot(){
         List<BaseBullet> res = new LinkedList<>();
@@ -82,4 +83,5 @@ public class BossEnemy extends AbstractEnemy {
         }
         return res;
     }
+
 }

@@ -21,7 +21,7 @@ public class PropBloodFactory implements PropFactory {
         return new PropBlood(this.locationX, this.locationY, this.speedX, this.speedY, this.hp);
     }
     public int getLocationX() {return this.locationX;}
-    public int getLocationY() {return  this.locationY;}
+    public int getLocationY() {return this.locationY;}
     public int getSpeedX() {return this.speedX;}
     public int getSpeedY() {return this.speedY;}
     public int getHp() {return this.hp;}

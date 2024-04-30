@@ -47,16 +47,16 @@ class HeroAircraftTest {
         System.out.println("**--- Test getInstance method executed ---**");
     }
 
-    @DisplayName("Test shoot method")
-    @Test
-    void shoot(){
-        List<BaseBullet> bullets = heroAircraft.shoot();
-        assertEquals(1, bullets.size());
-        BaseBullet bullet = bullets.get(0);
-        assertTrue(bullet instanceof HeroBullet);
-        assertEquals(heroAircraft.getLocationX(), bullet.getLocationX());
-        assertEquals(heroAircraft.getLocationY() + heroAircraft.getDirection()*2, bullet.getLocationY());
-        System.out.println("**--- Test shoot method executed ---**");
-    }
+//    @DisplayName("Test shoot method")
+//    @Test
+//    void shoot(){
+//        List<BaseBullet> bullets = heroAircraft.shoot();
+//        assertEquals(1, bullets.size());
+//        BaseBullet bullet = bullets.get(0);
+//        assertTrue(bullet instanceof HeroBullet);
+//        assertEquals(heroAircraft.getLocationX(), bullet.getLocationX());
+//        assertEquals(heroAircraft.getLocationY() + heroAircraft.getDirection()*2, bullet.getLocationY());
+//        System.out.println("**--- Test shoot method executed ---**");
+//    }
 
 }

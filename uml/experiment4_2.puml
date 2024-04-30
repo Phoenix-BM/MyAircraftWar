@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface RecordDAO {
+    + {abstract} display():List<Record>
+    + {abstract} add(Record record): void
+    + {abstract} remove(Record record): void
+    + {abstract} readFromTextFile(String filename): void
+    + {abstract} writeToTextFile(String filename): void
+    + {abstract} printRecord(): void
+}
+
+class RecordDAOImpl {
+    - records: List<Record>
+    + RecordDAOImpl()
+    + display():List<Record>
+    + add(Record record): void
+    + remove(Record record): void
+    + readFromTextFile(String filename): void
+    + writeToTextFile(String filename): void
+    + printRecord(): void
+}
+
+class Record {
+    - userID:String
+    - score:int
+    - timeStamp:String
+    + Record(String userID, int score, String timeStamp)
+    + getUserID():String
+    + setUserID(String userID):void
+    + getScore():int
+    + setScore(int score):void
+    + getTimeStamp():String
+    + setTimeStamp(String timeStamp):void
+}
+class DAOPatternDemo {
+    + DAODemo(int score): void
+}
+
+RecordDAOImpl ..|> RecordDAO
+RecordDAOImpl --> Record
+
+DAOPatternDemo --> RecordDAOImpl
+
+@enduml
