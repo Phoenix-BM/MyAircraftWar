@@ -4,7 +4,7 @@ public class Record {
     private String userID;
     private int score;
     private String timeStamp;
-    Record(String userID, int score, String timeStamp){
+    public Record(String userID, int score, String timeStamp){
         this.userID = userID;
         this.score = score;
         this.timeStamp = timeStamp;

@@ -14,9 +14,12 @@ import java.util.List;
  * @author hitsz
  */
 public class MobEnemy extends AbstractEnemy {
-
-    public MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score) {
-        super(locationX, locationY, speedX, speedY, hp, score);
+    private int mobEnemyScore = 10;
+    private int power = 0;
+    public MobEnemy(int locationX, int locationY, double speedX, double speedY, int hp, int score, int power) {
+        super(locationX, locationY, speedX, speedY, hp, score, power);
+        this.score = mobEnemyScore;
+        this.power = power;
     }
 
     @Override
@@ -40,5 +43,11 @@ public class MobEnemy extends AbstractEnemy {
     @Override
     public List<BaseBullet> executeStrategy(AbstractAircraft abstractAircraft){
         return new LinkedList<>();
+    }
+
+    @Override
+    public int bombUpdate(){
+        this.vanish();
+        return this.score;
     }
 }

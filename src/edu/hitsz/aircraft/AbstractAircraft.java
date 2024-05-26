@@ -3,6 +3,7 @@ package edu.hitsz.aircraft;
 import edu.hitsz.bullet.*;
 import edu.hitsz.basic.AbstractFlyingObject;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
     protected int hp;
     protected Strategy strategy;
 
-    public AbstractAircraft(int locationX, int locationY, int speedX, int speedY, int hp) {
+    public AbstractAircraft(int locationX, int locationY, double speedX, double speedY, int hp) {
         super(locationX, locationY, speedX, speedY);
         this.hp = hp;
         this.maxHp = hp;
@@ -44,6 +45,13 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
         return hp;
     }
 
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+    public int getMaxHp(){
+        return maxHp;
+    }
+
     public void setStrategy(Strategy strategy) {
         this.strategy = strategy;
     }
@@ -59,17 +67,19 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
 
     public List<BaseBullet> executeStrategy(AbstractAircraft abstractAircraft){
 
-        if(abstractAircraft instanceof EliteEnemy){
-            abstractAircraft.setStrategy(new DirectShoot());
-        }
-        else if(abstractAircraft instanceof ElitePlusEnemy){
-            abstractAircraft.setStrategy(new ScatteringShoot());
-        }
-        else if(abstractAircraft instanceof BossEnemy){
-            abstractAircraft.setStrategy(new SurroundingShoot());
-        }
+//        if(abstractAircraft instanceof EliteEnemy){
+//            abstractAircraft.setStrategy(new DirectShoot());
+//        }
+//        else if(abstractAircraft instanceof ElitePlusEnemy){
+//            abstractAircraft.setStrategy(new ScatteringShoot());
+//        }
+//        else if(abstractAircraft instanceof BossEnemy){
+//            abstractAircraft.setStrategy(new SurroundingShoot());
+//        }
         return strategy.shootStrategy(abstractAircraft);
     }
+    // 在 HeroAircraft 类和 AbstractEnemy 类中添加以下方法
+
 }
 
 

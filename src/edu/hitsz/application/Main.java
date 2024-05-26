@@ -1,5 +1,7 @@
 package edu.hitsz.application;
 
+import edu.hitsz.layout.StartPage;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,6 +13,8 @@ public class Main {
 
     public static final int WINDOW_WIDTH = 512;
     public static final int WINDOW_HEIGHT = 768;
+    public static final CardLayout cardLayout = new CardLayout(0,0);
+    public static final JPanel cardPanel = new JPanel(cardLayout);
 
     public static void main(String[] args) {
 
@@ -26,9 +30,12 @@ public class Main {
                 WINDOW_WIDTH, WINDOW_HEIGHT);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Game game = new Game();
-        frame.add(game);
+//        Game game = new Game();
+//        frame.add(game);
+        frame.add(cardPanel);
+        StartPage start = new StartPage();
+        cardPanel.add(start.getMainPanel());
         frame.setVisible(true);
-        game.action();
+//        game.action();
     }
 }

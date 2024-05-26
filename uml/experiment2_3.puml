@@ -18,6 +18,7 @@ abstract class AbstractEnemy
     + getScore():int
     + {abstract} shoot():List<BaseBullet>
     + {abstract} propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
+    + {abstract} bombUpdate():int
 }
 
 interface EnemyFactory
@@ -40,6 +41,23 @@ class EliteEnemy {
     + forward():void
     + shoot():List<BaseBullet>
     + propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
+    + bombUpdate():int
+}
+
+class ElitePlusEnemy {
+    + ElitePlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
+    + bombUpdate():int
+}
+
+class BossEnemy {
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
+    + bombUpdate():int
 }
 
 class MobEnemyFactory
@@ -74,13 +92,51 @@ class EliteEnemyFactory
      + getHp(): int
 }
 
+class ElitePlusEnemyFactory
+{
+     - locationX: int
+     - locationY：int
+     - speedX: int
+     - speedY: int
+     - hp: int
+     - score: int
+     + createEnemy():AbstractEnemy
+     + getLocationX(): int
+     + getLocationY(): int
+     + getSpeedX(): int
+     + getSpeedY(): int
+     + getHp(): int
+}
+
+class BossEnemyFactory
+{
+     - locationX: int
+     - locationY：int
+     - speedX: int
+     - speedY: int
+     - hp: int
+     - score: int
+     + createEnemy():AbstractEnemy
+     + getLocationX(): int
+     + getLocationY(): int
+     + getSpeedX(): int
+     + getSpeedY(): int
+     + getHp(): int
+}
+
 EnemyFactory <|.. MobEnemyFactory
 EnemyFactory <|.. EliteEnemyFactory
+EnemyFactory <|.. ElitePlusEnemyFactory
+EnemyFactory <|.. BossEnemyFactory
 
 AbstractEnemy <|-- MobEnemy
 AbstractEnemy <|-- EliteEnemy
+AbstractEnemy <|-- ElitePlusEnemy
+AbstractEnemy <|-- BossEnemy
 
 MobEnemy <.. MobEnemyFactory
 EliteEnemy <.. EliteEnemyFactory
+ElitePlusEnemy <.. ElitePlusEnemyFactory
+BossEnemy <.. BossEnemyFactory
 
 @enduml

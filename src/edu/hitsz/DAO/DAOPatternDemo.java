@@ -1,56 +1,67 @@
 package edu.hitsz.DAO;
 
-import edu.hitsz.application.Game;
+import edu.hitsz.application.Main;
+import edu.hitsz.layout.PlayerScore;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.*;
 
 public class DAOPatternDemo {
+    public static final CardLayout cardLayout = new CardLayout(0,0);
+    public static final JPanel cardPanel = new JPanel(cardLayout);
     public void DAODemo(int score) {
-        RecordDAO recordDAO = new RecordDAOImpl();
-        Scanner scanner = new Scanner(System.in);
+        RecordDAOImpl recordDAOImpl = new RecordDAOImpl(score);
+        recordDAOImpl.readFromTextFile("records.txt");
 
-        System.out.println("你要存储记录吗？（y/n）");
-        String choice = scanner.nextLine();
-        if(Objects.equals(choice, "y")){
-            System.out.println("请输入玩家名：");
-            String userID = scanner.nextLine();
+//        Scanner scanner = new Scanner(System.in);
+
+//        System.out.println("你要存储记录吗？（y/n）");
+//        String choice = scanner.nextLine();
+//        if(Objects.equals(choice, "y")){
+//            System.out.println("请输入玩家名：");
+//            String userID = scanner.nextLine();
 
             // 获取当前时间
-            Date currentTime = new Date();
+//            Date currentTime = new Date();
+//
+//            // 设置日期格式
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//
+//            // 格式化当前时间为指定格式的字符串
+//            String formattedTime = dateFormat.format(currentTime);
+//
+//            Record record = new Record(userID, score, formattedTime);
+//
+//            recordDAOImpl.readFromTextFile("records.txt");
+//            recordDAOImpl.update(record);
 
-            // 设置日期格式
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        JFrame frame = new JFrame("My AircraftWar");
+//        frame.setSize(800, 1024);
+//        frame.setResizable(false);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        frame.add(cardPanel);
 
-            // 格式化当前时间为指定格式的字符串
-            String formattedTime = dateFormat.format(currentTime);
+        PlayerScore playerScore = new PlayerScore(recordDAOImpl);
+        Main.cardPanel.add(playerScore.getMainPanel());
+        Main.cardLayout.last(Main.cardPanel);
+        playerScore.showInputDialog();
+//        cardPanel.add(playerScore.getMainPanel());
+//        frame.setVisible(true);
 
-            Record record = new Record(userID, score, formattedTime);
+        for(int i=0; i<30; i++)
+            System.out.print("*");
+        System.out.print("\n");
+        for(int i=0; i<10; i++)
+            System.out.print(" ");
+        System.out.println("得分排行榜");
+        for(int i=0; i<30; i++)
+            System.out.print("*");
+        System.out.print("\n");
 
-            recordDAO.add(record);
-            recordDAO.readFromTextFile("records.txt");
-
-            System.out.print("你要删除记录吗？（y/n）");
-            String chooseDelete = scanner.nextLine();
-
-            if(Objects.equals(chooseDelete, "y")){
-                System.out.print("请输入玩家名：");
-                String playerDeleteName = scanner.nextLine();
-                recordDAO.remove(playerDeleteName);
-            }
-            recordDAO.writeToTextFile("records.txt");
-            for(int i=0; i<30; i++)
-                System.out.print("*");
-            System.out.print("\n");
-            for(int i=0; i<10; i++)
-                System.out.print(" ");
-            System.out.println("得分排行榜");
-            for(int i=0; i<30; i++)
-                System.out.print("*");
-            System.out.print("\n");
-            recordDAO.printRecord();
-        }
+        recordDAOImpl.printRecord();
     }
 }
+
+
+

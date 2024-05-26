@@ -19,14 +19,13 @@ public class ScatteringShoot implements Strategy {
     public List<BaseBullet> shootStrategy(AbstractAircraft abstractAircraft) {
         if (abstractAircraft instanceof HeroAircraft){
             direction = -1;
-            power = 30;
         }
         List<BaseBullet> res = new LinkedList<>();
         if (abstractAircraft instanceof ElitePlusEnemy || abstractAircraft instanceof HeroAircraft) {
             int x = abstractAircraft.getLocationX();
             int y = abstractAircraft.getLocationY() + direction * 2;
-            int speedX = direction * 2;
-            int speedY = abstractAircraft.getSpeedY() + direction * 5;
+            double speedX = direction * 2;
+            double speedY = abstractAircraft.getSpeedY() + direction * 5;
             BaseBullet bullet;
             if (abstractAircraft instanceof ElitePlusEnemy) {
                 for (int i = 0; i < shootnum; i++) {

@@ -2,6 +2,7 @@ package edu.hitsz.aircraft;
 
 import edu.hitsz.application.Main;
 import edu.hitsz.bullet.BaseBullet;
+import edu.hitsz.bullet.DirectShoot;
 import edu.hitsz.bullet.EnemyBullet;
 import edu.hitsz.prop.*;
 
@@ -14,11 +15,13 @@ public class EliteEnemy extends AbstractEnemy {
     private int shootnum = 1;
     private int power = 20;
     private int direction = 1;
+    private int eliteEnemyScore = 30;
 
-    public EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score) {
-        super(locationX, locationY, speedX, speedY, hp, score);
+    public EliteEnemy(int locationX, int locationY, double speedX, double speedY, int hp, int score, int power) {
+        super(locationX, locationY, speedX, speedY, hp, score, power);
+        this.score = eliteEnemyScore;
+        this.power = power;
     }
-
 
     @Override
     public void forward() {
@@ -56,19 +59,29 @@ public class EliteEnemy extends AbstractEnemy {
 
         return props;
     }
+    public List<BaseBullet> executeStrategy(AbstractAircraft abstractAircraft){
+        abstractAircraft.setStrategy(new DirectShoot());
+        return strategy.shootStrategy(abstractAircraft);
+    }
+
     @Override
     public List<BaseBullet> shoot(){
         List<BaseBullet> res = new LinkedList<>();
         int x = this.getLocationX();
         int y = this.getLocationY() + direction * 2;
-        int speedX = 0;
-        int speedY = this.getSpeedY() + direction * 5;
+        double speedX = 0;
+        double speedY = this.getSpeedY() + direction * 5;
         BaseBullet bullet;
         for(int i=0; i<shootnum; i++){
             bullet = new EnemyBullet(x + (i * 2 - shootnum + 1) * 10, y, speedX, speedY, power);
             res.add(bullet);
         }
         return res;
+    }
+    @Override
+    public int bombUpdate(){
+        this.vanish();
+        return this.score;
     }
 
 }

@@ -9,7 +9,7 @@ public class PropBloodFactory implements PropFactory {
     private int locationY ;
     private int speedX = 0;
     private int speedY = 2;
-    private int hp = 20;
+    private int hp = 100;
     private static final int OFFSET_X = 30; // 横向偏移量
     private static final int OFFSET_Y = 30; // 纵向偏移量
     @Override

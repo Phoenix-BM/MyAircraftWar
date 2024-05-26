@@ -37,14 +37,29 @@ abstract class AbstractAircraft
     + getHp():int
     + getScore():int
     + {abstract} shoot():List<BaseBullet>
+    + setStrategy(Strategy strategy):void
+    + executeStrategy(AbstractAircraft abstractAircraft):List<BaseBullet>
  }
 
+abstract class AbstractEnemy
+{
+    # hp:int
+    # score:int
+    + AbstractEnemy(int locationX, int locationY, int speedX, int speedY, int hp)
+    + decreaseHp(int decrease):void
+    + getScore():int
+    + {abstract} shoot():List<BaseBullet>
+    + {abstract} propDrop(List<BaseProp> props, AbstractEnemy eliteEnemy):List<BaseProp>
+}
+AbstractAircraft <|-- AbstractEnemy
 
 class HeroAircraft {
+    - {static} instance:HeroAircraft
     - shootNum:int
     - power:int
     - direction:int
-    + HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    - HeroAircraft(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    + {static} getInstance():HeroAircraft
     + forward():void
     + shoot():List<BaseBullet>
 }
@@ -56,16 +71,40 @@ class MobEnemy {
     + MobEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
     + forward():void
     + shoot():List<BaseBullet>
+    + executeStrategy(AbstractAircraft abstractAircraft):List<BaseBullet>
+    + bombUpdate():int
 }
-AbstractAircraft <|-- MobEnemy
+AbstractEnemy <|-- MobEnemy
 
 class EliteEnemy {
     - score:int
     + EliteEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
     + forward():void
     + shoot():List<BaseBullet>
+    + executeStrategy(AbstractAircraft abstractAircraft):List<BaseBullet>
+    + bombUpdate():int
 }
-AbstractAircraft <|-- EliteEnemy
+AbstractEnemy <|-- EliteEnemy
+
+class ElitePlusEnemy {
+    - score:int
+    + ElitePlusEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + executeStrategy(AbstractAircraft abstractAircraft):List<BaseBullet>
+    + bombUpdate():int
+}
+AbstractEnemy <|-- ElitePlusEnemy
+
+class BossEnemy {
+    - score:int
+    + BossEnemy(int locationX, int locationY, int speedX, int speedY, int hp, int score)
+    + forward():void
+    + shoot():List<BaseBullet>
+    + executeStrategy(AbstractAircraft abstractAircraft):List<BaseBullet>
+    + bombUpdate():int
+}
+AbstractEnemy <|-- BossEnemy
 
 abstract class BaseBullet
 {
@@ -73,16 +112,19 @@ abstract class BaseBullet
     + BaseBullet(int locationX, int locationY, int speedX, int speedY, int power)
     + forward():void
 	+ getPower():int
+	+ {abstract} bombUpdate():int
 }
 
 class HeroBullet {
     + HeroBullet(int locationX, int locationY,
      int speedX, int speedY, int power)
+    + bombUpdate():int
 }
 
 class EnemyBullet {
     + EnemyBullet(int locationX, int locationY,
      int speedX, int speedY, int power)
+    + bombUpdate():int
 }
 
 BaseBullet <|-- HeroBullet
@@ -94,6 +136,7 @@ AbstractFlyingObject <|-- BaseBullet
 abstract class BaseProp {
     + BaseProp(int locationX, int locationY, int speedX, int speedY)
     + forward():void
+    + {abstract} effect(List<AbstractEnemy> enemyAircrafts, List<BaseBullet> enemyBullets):int
 }
 
 class PropBlood {
@@ -101,16 +144,19 @@ class PropBlood {
     + PropBlood(int locationX, int locationY,
       int speedX, int speedY, int hp)
     + getHp():int
+    + effect(List<AbstractEnemy> enemyAircrafts, List<BaseBullet> enemyBullets):int
 }
 
 class PropBomb {
     + PropBomb(int locationX, int locationY,
       int speedX, int speedY)
+    + effect(List<AbstractEnemy> enemyAircrafts, List<BaseBullet> enemyBullets):int
 }
 
 class PropBullet {
     + PropBullet(int locationX, int locationY,
       int speedX, int speedY)
+    + effect(List<AbstractEnemy> enemyAircrafts, List<BaseBullet> enemyBullets):int
 }
 
 BaseProp <|-- PropBlood

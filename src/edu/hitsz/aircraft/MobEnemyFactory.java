@@ -9,12 +9,13 @@ public class MobEnemyFactory implements EnemyFactory{
     private int locationY = (int) (Math.random() * Main.WINDOW_HEIGHT * 0.05);
     private int speedX = 0;
     private int speedY = 10;
-    private int hp = 30;
+    private int hp = 20;
     private int score = 10;
+    private int power = 0;
     @Override
     public AbstractEnemy createEnemy(){
         return new MobEnemy(this.locationX, this.locationY,
-                this.speedX, this.speedY, this.hp, this.score
+                this.speedX, this.speedY, this.hp, this.score, this.power
         );
     }
 

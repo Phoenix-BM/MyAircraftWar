@@ -1,6 +1,10 @@
 package edu.hitsz.prop;
 
+import edu.hitsz.aircraft.AbstractEnemy;
 import edu.hitsz.aircraft.HeroAircraft;
+import edu.hitsz.bullet.BaseBullet;
+
+import java.util.List;
 
 public class PropBlood extends BaseProp {
     private final int hp;
@@ -14,8 +18,9 @@ public class PropBlood extends BaseProp {
     }
 
     @Override
-    public void effect(){
+    public int effect(List<AbstractEnemy> enemyAircrafts, List<BaseBullet> enemyBullets){
         HeroAircraft.getInstance().increaseHp(getHp());
         System.out.println("HpSupply active!");
+        return 0;
     }
 }

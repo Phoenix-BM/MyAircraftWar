@@ -1,7 +1,12 @@
 package edu.hitsz.prop;
 
+import edu.hitsz.aircraft.AbstractEnemy;
 import edu.hitsz.application.Main;
 import edu.hitsz.basic.AbstractFlyingObject;
+import edu.hitsz.bullet.BaseBullet;
+
+import java.util.List;
+
 public abstract class BaseProp extends AbstractFlyingObject {
     public BaseProp(int locationX, int locationY, int speedX, int speedY) {
         super(locationX, locationY, speedX, speedY);
@@ -23,5 +28,5 @@ public abstract class BaseProp extends AbstractFlyingObject {
         }
     }
 
-    public abstract void effect();
+    public abstract int effect(List<AbstractEnemy> enemyAircrafts, List<BaseBullet> enemyBullets);
 }

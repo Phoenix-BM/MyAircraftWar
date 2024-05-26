@@ -26,8 +26,8 @@ public class DirectShoot implements Strategy {
         if (abstractAircraft instanceof EliteEnemy || abstractAircraft instanceof HeroAircraft) {
             int x = abstractAircraft.getLocationX();
             int y = abstractAircraft.getLocationY() + direction * 2;
-            int speedX = 0;
-            int speedY = abstractAircraft.getSpeedY() + direction * 5;
+            double speedX = 0;
+            double speedY = abstractAircraft.getSpeedY() + direction * 5;
             BaseBullet bullet;
             if (abstractAircraft instanceof EliteEnemy) {
                 for (int i = 0; i < shootnum; i++) {
